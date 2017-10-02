@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Cloudix.iml" filepath="$PROJECT_DIR$/Cloudix.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Cloudix_android.iml" filepath="$PROJECT_DIR$/Cloudix_android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
