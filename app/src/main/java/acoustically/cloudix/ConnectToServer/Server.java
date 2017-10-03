@@ -1,4 +1,4 @@
-package acoustically.cloudix;
+package acoustically.cloudix.ConnectToServer;
 
 /**
  * Created by acoustically on 17. 10. 2.

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="acoustically.cloudix.AddIOTDevice.AddIOTDeviceActivity2">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+    <EditText
+      android:id="@+id/editTextSwitch1"
+      android:layout_width="300dp"
+      android:layout_height="40dp"
+      android:hint="Switch 1. Name"/>
+    <EditText
+      android:id="@+id/editTextSwitch2"
+      android:layout_width="300dp"
+      android:layout_height="40dp"
+      android:layout_marginTop="30dp"
+      android:hint="Switch 2. Name"/>
+    <TextView
+      android:clickable="true"
+      android:onClick="onClickAdd"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="30dp"
+      android:text="Add"
+      android:textSize="20dp"
+      android:textColor="#face"
+      />
+  </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

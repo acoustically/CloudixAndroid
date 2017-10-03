@@ -1,14 +1,15 @@
-package acoustically.cloudix;
+package acoustically.cloudix.Sign;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.ExpandedMenuView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-public class SignUpGetPassword extends SignInGetPassword {
+import acoustically.cloudix.Global;
+import acoustically.cloudix.R;
+
+public class SignUpGetPasswordActivity extends SignInGetPasswordActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

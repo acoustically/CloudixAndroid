@@ -1,17 +1,21 @@
-package acoustically.cloudix;
+package acoustically.cloudix.Sign;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.ExpandedMenuView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
-public class SignInGetID extends AppCompatActivity {
+import acoustically.cloudix.ConnectToServer.HttpConnector;
+import acoustically.cloudix.ConnectToServer.HttpResponseListener;
+import acoustically.cloudix.ConnectToServer.Server;
+import acoustically.cloudix.Global;
+import acoustically.cloudix.R;
+
+public class SignInGetIdActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -19,10 +23,11 @@ public class SignInGetID extends AppCompatActivity {
   }
 
   public void onClickNext(View view) {
+    Global.Obj2 = this;
     EditText editTextId = (EditText)findViewById(R.id.sign_in_id);
     final String id = editTextId.getText().toString();
     try {
-      queryToServer(id, "sign-in-id.json", SignInGetPassword.class);
+      queryToServer(id, "sign-in-id.json", SignInGetPasswordActivity.class);
     } catch (Exception e) {
       Log.e("ERROR", "Http request failed json");
     }
@@ -48,6 +53,5 @@ public class SignInGetID extends AppCompatActivity {
     Intent intent = new Intent(this, _class);
     intent.putExtra("data", id);
     startActivity(intent);
-    finish();
   }
 }

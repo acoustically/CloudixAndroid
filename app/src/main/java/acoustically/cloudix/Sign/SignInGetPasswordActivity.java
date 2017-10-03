@@ -1,4 +1,4 @@
-package acoustically.cloudix;
+package acoustically.cloudix.Sign;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +9,15 @@ import android.widget.EditText;
 
 import org.json.JSONObject;
 
-public class SignInGetPassword extends AppCompatActivity {
+import acoustically.cloudix.ConnectToServer.HttpConnector;
+import acoustically.cloudix.ConnectToServer.HttpResponseListener;
+import acoustically.cloudix.ConnectToServer.Server;
+import acoustically.cloudix.Global;
+import acoustically.cloudix.IndexActivity;
+import acoustically.cloudix.MainActivity;
+import acoustically.cloudix.R;
+
+public class SignInGetPasswordActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -30,6 +38,8 @@ public class SignInGetPassword extends AppCompatActivity {
     Intent intent = new Intent(this, MainActivity.class);
     startActivity(intent);
     finish();
+    ((IndexActivity)Global.Obj1).finish();
+    ((AppCompatActivity)Global.Obj2).finish();
   }
   protected void qeuryToServer(String id, String password, String action) throws Exception {
     JSONObject json = new JSONObject();

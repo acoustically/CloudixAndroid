@@ -5,23 +5,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class Index extends AppCompatActivity {
+import acoustically.cloudix.Sign.SignInGetIdActivity;
+import acoustically.cloudix.Sign.SignUpGetIdActivity;
+
+public class IndexActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_index);
+    Global.Obj1 = this;
   }
 
   public void onClickSignUp(View view) {
-    Intent intent = new Intent(this, SignUpGetID.class);
+    Intent intent = new Intent(this, SignUpGetIdActivity.class);
     startActivity(intent);
-    finish();
   }
 
   public void onClickSignIn(View view) {
-    Intent intent = new Intent(this, SignInGetID.class);
+    Intent intent = new Intent(this, SignInGetIdActivity.class);
     startActivity(intent);
-    finish();
   }
 }

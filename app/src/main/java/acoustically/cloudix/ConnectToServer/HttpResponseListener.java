@@ -1,4 +1,4 @@
-package acoustically.cloudix;
+package acoustically.cloudix.ConnectToServer;
 
 import android.os.Handler;
 
