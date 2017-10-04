@@ -30,7 +30,7 @@ public class AddIOTDeviceActivity1 extends AppCompatActivity {
     try {
       connector.post(buildJson(), new HttpResponseListener() {
         @Override
-        public void HttpResponse(JSONObject json) {
+        public void httpResponse(JSONObject json) {
           try {
             if (json.getString("response").equals("success")) {
               navigate(getSerial());
@@ -41,6 +41,11 @@ public class AddIOTDeviceActivity1 extends AppCompatActivity {
             Toast.makeText(activity, "Error occur", Toast.LENGTH_LONG).show();
             e.printStackTrace();
           }
+        }
+
+        @Override
+        public void httpExcepted() {
+          Toast.makeText(activity, "Server Error", Toast.LENGTH_LONG).show();
         }
       });
     } catch (Exception e) {

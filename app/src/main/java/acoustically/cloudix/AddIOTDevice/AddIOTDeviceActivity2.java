@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,7 +18,7 @@ import acoustically.cloudix.MainActivity;
 import acoustically.cloudix.R;
 
 public class AddIOTDeviceActivity2 extends AppCompatActivity {
-
+  AddIOTDeviceActivity2 activity = this;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -30,14 +31,19 @@ public class AddIOTDeviceActivity2 extends AppCompatActivity {
     try {
       connector.post(buildJson(), new HttpResponseListener() {
         @Override
-        public void HttpResponse(JSONObject json) {
+        public void httpResponse(JSONObject json) {
           try {
-            if(json.getString("response").equals("success")) {
+            if (json.getString("response").equals("success")) {
               navigate();
             }
           } catch (Exception e) {
 
           }
+        }
+
+        @Override
+        public void httpExcepted() {
+          Toast.makeText(activity, "Server Error", Toast.LENGTH_LONG).show();
         }
       });
     } catch (Exception e) {

@@ -1,5 +1,6 @@
 package acoustically.cloudix.ConnectToServer;
 
+import android.os.Message;
 import android.util.Log;
 
 import org.json.JSONObject;
@@ -39,10 +40,12 @@ public class HttpConnector {
             httpURLConnection.setRequestMethod("GET");
             InputStream inputStream = new BufferedInputStream(httpURLConnection.getInputStream());
             String data = readData(inputStream);
-            listener.HttpResponse(new JSONObject(data));
+            listener.httpResponse(new JSONObject(data));
             inputStream.close();
           } catch (Exception e) {
             Log.e("ERROR", "Http request failed");
+            e.printStackTrace();
+            listener.httpExcepted();
           } finally {
             httpURLConnection.disconnect();
           }
@@ -71,12 +74,17 @@ public class HttpConnector {
 
             InputStream inputStream = new BufferedInputStream(httpURLConnection.getInputStream());
             String data = readData(inputStream);
-            listener.HttpResponse(new JSONObject(data));
-
+            Message message = new Message();
+            message.what = 1;
+            message.obj = new JSONObject(data);
+            listener.sendMessage(message);
             inputStream.close();
             outputStream.close();
           } catch (Exception e) {
             Log.e("ERROR", "Http request failed");
+            Message message = new Message();
+            message.what = 2;
+            listener.sendMessage(message);
             e.printStackTrace();
           } finally {
             httpURLConnection.disconnect();

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -18,6 +19,7 @@ import acoustically.cloudix.MainActivity;
 import acoustically.cloudix.R;
 
 public class SignInGetPasswordActivity extends AppCompatActivity {
+  SignInGetPasswordActivity activity = this;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -41,21 +43,27 @@ public class SignInGetPasswordActivity extends AppCompatActivity {
     ((IndexActivity)Global.Obj1).finish();
     ((AppCompatActivity)Global.Obj2).finish();
   }
-  protected void qeuryToServer(String id, String password, String action) throws Exception {
+  protected void qeuryToServer(final String id, String password, String action) throws Exception {
     JSONObject json = new JSONObject();
     json.put("id", id);
     json.put("password", password);
     HttpConnector connector = new HttpConnector(Server.getUrl(action));
     connector.post(json, new HttpResponseListener() {
       @Override
-      public void HttpResponse(JSONObject json) {
+      public void httpResponse(JSONObject json) {
         try {
           if (json.getString("response").equals("success")) {
+            Global.id = id;
             navigateToMainActivity();
           }
         } catch (Exception e) {
           e.printStackTrace();
         }
+      }
+
+      @Override
+      public void httpExcepted() {
+        Toast.makeText(activity, "Server Error", Toast.LENGTH_LONG).show();
       }
     });
   }

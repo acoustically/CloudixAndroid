@@ -34,13 +34,14 @@ public class AddIOTDeviceActivity extends AppCompatActivity {
 
       connector.post(buildJson(), new HttpResponseListener() {
         @Override
-        public void HttpResponse(JSONObject json) {
+        public void httpResponse(JSONObject json) {
           try {
             if(json.getString("response").equals("success")) {
-              if(json.getBoolean("isPasswordDirty")) {
-                navigateToNext1(getSerial());
-              } else {
+              Log.e("ERROR", ""+json.getBoolean("isOriginalPasswordDirty"));
+              if(json.getBoolean("isOriginalPasswordDirty")) {
                 navigateToNext2(getSerial());
+              } else {
+                navigateToNext1(getSerial());
               }
             } else {
               Toast.makeText(activity, json.getString("message"), Toast.LENGTH_LONG).show();
@@ -51,6 +52,11 @@ public class AddIOTDeviceActivity extends AppCompatActivity {
             e.printStackTrace();
           }
         }
+
+      @Override
+      public void httpExcepted() {
+        Toast.makeText(activity, "Server Error", Toast.LENGTH_LONG).show();
+      }
       });
     } catch (Exception e) {
       Log.e("ERROR", "http request error");
@@ -59,12 +65,10 @@ public class AddIOTDeviceActivity extends AppCompatActivity {
   }
 
   private JSONObject buildJson() throws Exception{
-    EditText editTextDeviceSerial = (EditText) findViewById(R.id.editTextDeviceSerial);
-    EditText editTextDevicePassword = (EditText) findViewById(R.id.editTextDevicePassword);
-    String password = editTextDevicePassword.getText().toString();
     JSONObject json = new JSONObject();
+    json.put("user_id", Global.id);
     json.put("serial", getSerial());
-    json.put("password", password);
+    json.put("password", getPassword());
     return json;
   }
 
@@ -79,9 +83,13 @@ public class AddIOTDeviceActivity extends AppCompatActivity {
     intent.putExtra("serial", serial);
     startActivity(intent);
   }
-
   private String getSerial() {
-    Intent intent = getIntent();
-    return intent.getStringExtra("serial");
+    EditText editTextDeviceSerial = (EditText) findViewById(R.id.editTextDeviceSerial);
+    return editTextDeviceSerial.getText().toString();
   }
+  private String getPassword() {
+    EditText editTextDevicePassword = (EditText) findViewById(R.id.editTextDevicePassword);
+    return editTextDevicePassword.getText().toString();
+  }
+
 }

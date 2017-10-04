@@ -10,4 +10,5 @@ public class Global {
   static public Object Obj3;
   static public Object Obj4;
   static public Object Obj5;
+  static public String id;
 }

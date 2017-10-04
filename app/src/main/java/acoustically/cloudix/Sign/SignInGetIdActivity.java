@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -16,6 +17,7 @@ import acoustically.cloudix.Global;
 import acoustically.cloudix.R;
 
 public class SignInGetIdActivity extends AppCompatActivity {
+  SignInGetIdActivity activity = this;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -32,13 +34,13 @@ public class SignInGetIdActivity extends AppCompatActivity {
       Log.e("ERROR", "Http request failed json");
     }
   }
-  protected void queryToServer(final String id, String action, final Class class_) throws Exception {
+  protected void queryToServer(final String id, final String action, final Class class_) throws Exception {
     JSONObject json = new JSONObject();
     json.put("id", id);
     HttpConnector connector = new HttpConnector(Server.getUrl(action));
     connector.post(json, new HttpResponseListener() {
       @Override
-      public void HttpResponse(JSONObject json) {
+      public void httpResponse(JSONObject json) {
         try {
           if (json.getString("response").equals("success")) {
             navigateActivity(id, class_);
@@ -46,6 +48,11 @@ public class SignInGetIdActivity extends AppCompatActivity {
         } catch (Exception e) {
           e.printStackTrace();
         }
+      }
+
+      @Override
+      public void httpExcepted() {
+        Toast.makeText(activity, "Server Error", Toast.LENGTH_LONG).show();
       }
     });
   }
