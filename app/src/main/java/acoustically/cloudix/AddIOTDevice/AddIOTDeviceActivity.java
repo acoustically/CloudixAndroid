@@ -15,6 +15,7 @@ import java.net.HttpURLConnection;
 
 import acoustically.cloudix.ConnectToServer.HttpConnector;
 import acoustically.cloudix.ConnectToServer.HttpResponseListener;
+import acoustically.cloudix.ConnectToServer.JSONObjectWithToken;
 import acoustically.cloudix.ConnectToServer.Server;
 import acoustically.cloudix.Global;
 import acoustically.cloudix.R;
@@ -65,8 +66,7 @@ public class AddIOTDeviceActivity extends AppCompatActivity {
   }
 
   private JSONObject buildJson() throws Exception{
-    JSONObject json = new JSONObject();
-    json.put("user_id", Global.id);
+    JSONObject json = new JSONObjectWithToken();
     json.put("serial", getSerial());
     json.put("password", getPassword());
     return json;

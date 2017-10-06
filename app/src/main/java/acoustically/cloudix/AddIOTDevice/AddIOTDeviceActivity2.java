@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import acoustically.cloudix.ConnectToServer.HttpConnector;
 import acoustically.cloudix.ConnectToServer.HttpResponseListener;
+import acoustically.cloudix.ConnectToServer.JSONObjectWithToken;
 import acoustically.cloudix.ConnectToServer.Server;
 import acoustically.cloudix.Global;
 import acoustically.cloudix.MainActivity;
@@ -78,7 +79,7 @@ public class AddIOTDeviceActivity2 extends AppCompatActivity {
     JSONArray buttons = new JSONArray();
     buttons.put(button1Json);
     buttons.put(button2Json);
-    JSONObject json = new JSONObject();
+    JSONObject json = new JSONObjectWithToken();
     json.put("buttons", buttons);
     return json;
   }

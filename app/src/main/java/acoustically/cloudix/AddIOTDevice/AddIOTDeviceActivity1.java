@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import acoustically.cloudix.ConnectToServer.HttpConnector;
 import acoustically.cloudix.ConnectToServer.HttpResponseListener;
+import acoustically.cloudix.ConnectToServer.JSONObjectWithToken;
 import acoustically.cloudix.ConnectToServer.Server;
 import acoustically.cloudix.Global;
 import acoustically.cloudix.R;
@@ -59,7 +60,7 @@ public class AddIOTDeviceActivity1 extends AppCompatActivity {
     final String serial = intent.getStringExtra("serial");
     EditText editTextPassword = (EditText) findViewById(R.id.editTextDeviceNewPassword);
     String password = editTextPassword.getText().toString();
-    JSONObject json = new JSONObject();
+    JSONObject json = new JSONObjectWithToken();
     json.put("newPassword", password);
     json.put("serial", serial);
     return json;

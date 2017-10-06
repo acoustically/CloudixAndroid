@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import acoustically.cloudix.ConnectToServer.HttpConnector;
 import acoustically.cloudix.ConnectToServer.HttpResponseListener;
+import acoustically.cloudix.ConnectToServer.JSONObjectWithToken;
 import acoustically.cloudix.ConnectToServer.Server;
 import acoustically.cloudix.Global;
 import acoustically.cloudix.IndexActivity;
@@ -44,7 +45,7 @@ public class SignInGetPasswordActivity extends AppCompatActivity {
     ((AppCompatActivity)Global.Obj2).finish();
   }
   protected void qeuryToServer(final String id, String password, String action) throws Exception {
-    JSONObject json = new JSONObject();
+    JSONObject json = new JSONObjectWithToken();
     json.put("id", id);
     json.put("password", password);
     HttpConnector connector = new HttpConnector(Server.getUrl(action));
@@ -55,6 +56,8 @@ public class SignInGetPasswordActivity extends AppCompatActivity {
           if (json.getString("response").equals("success")) {
             Global.id = id;
             navigateToMainActivity();
+          } else {
+            Toast.makeText(activity, json.getString("message"), Toast.LENGTH_LONG).show();
           }
         } catch (Exception e) {
           e.printStackTrace();
