@@ -27,7 +27,7 @@ public class AddIOTDeviceActivity1 extends AppCompatActivity {
 
   public void onClickNext(View view) {
     Global.Obj2 = this;
-    HttpConnector connector = new HttpConnector(Server.getUrl("new-device-password.json"));
+    HttpConnector connector = new HttpConnector(Server.getUrl("add-device/new-password.json"));
     try {
       connector.post(buildJson(), new HttpResponseListener() {
         @Override

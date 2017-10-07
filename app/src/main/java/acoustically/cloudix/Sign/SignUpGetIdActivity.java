@@ -21,7 +21,7 @@ public class SignUpGetIdActivity extends SignInGetIdActivity {
     EditText editTextId = (EditText)findViewById(R.id.sign_up_id);
     final String id = editTextId.getText().toString();
     try {
-      queryToServer(id, "sign-up-id.json", SignUpGetPasswordActivity.class);
+      queryToServer(id, "sign/up-id.json", SignUpGetPasswordActivity.class);
     } catch (Exception e) {
       Log.e("ERROR", "Http request failed json");
     }
