@@ -32,7 +32,7 @@ public class SignInGetPasswordActivity extends AppCompatActivity {
     Intent intent = getIntent();
     String id = intent.getStringExtra("data");
     try {
-      qeuryToServer(id, password, "sign/in.json");
+      qeuryToServer(id, password, "sign-in.json");
     } catch (Exception e) {
       Log.e("ERROR", "http request failed - json");
     }

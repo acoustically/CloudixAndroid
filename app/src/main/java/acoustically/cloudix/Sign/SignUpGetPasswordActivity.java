@@ -22,7 +22,7 @@ public class SignUpGetPasswordActivity extends SignInGetPasswordActivity {
     Intent intent = getIntent();
     String id = intent.getStringExtra("data");
     try {
-      qeuryToServer(id, password, "sign/up.json");
+      qeuryToServer(id, password, "sign-up.json");
     } catch (Exception e) {
       Log.e("ERROR", "http request failed - json");
     }

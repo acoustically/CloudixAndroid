@@ -30,7 +30,7 @@ public class SignInGetIdActivity extends AppCompatActivity {
     EditText editTextId = (EditText)findViewById(R.id.sign_in_id);
     final String id = editTextId.getText().toString();
     try {
-      queryToServer(id, "sign/in-id.json", SignInGetPasswordActivity.class);
+      queryToServer(id, "sign-in-id.json", SignInGetPasswordActivity.class);
     } catch (Exception e) {
       Log.e("ERROR", "Http request failed json");
     }
