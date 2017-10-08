@@ -56,13 +56,11 @@ public class AddIOTDeviceActivity1 extends AppCompatActivity {
     }
   }
   private JSONObject buildJson() throws Exception{
-    Intent intent = getIntent();
-    final String serial = intent.getStringExtra("serial");
     EditText editTextPassword = (EditText) findViewById(R.id.editTextDeviceNewPassword);
     String password = editTextPassword.getText().toString();
     JSONObject json = new JSONObjectWithToken();
-    json.put("newPassword", password);
-    json.put("serial", serial);
+    json.put("password", password);
+    json.put("serial", getSerial());
     return json;
   }
   private void navigate(String serial) {
