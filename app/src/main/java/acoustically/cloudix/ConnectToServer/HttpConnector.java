@@ -1,8 +1,11 @@
 package acoustically.cloudix.ConnectToServer;
 
 import android.os.Message;
+import android.util.JsonReader;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -76,7 +79,14 @@ public class HttpConnector {
             String data = readData(inputStream);
             Message message = new Message();
             message.what = 1;
-            message.obj = new JSONObject(data);
+            try {
+              message.obj = new JSONObject(data);
+            } catch (JSONException e) {
+              JSONArray  jsonArray = new JSONArray(data);
+              JSONObject jsonObject = new JSONObject();
+              jsonObject.put("response", jsonArray);
+              message.obj = jsonObject;
+            }
             listener.sendMessage(message);
             inputStream.close();
             outputStream.close();

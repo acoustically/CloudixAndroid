@@ -14,9 +14,10 @@
     android:orientation="vertical"
     tools:layout_editor_absoluteY="8dp"
     tools:layout_editor_absoluteX="8dp">
-    <LinearLayout
+    <FrameLayout
+      android:id="@+id/viewDeviceFrame"
       android:layout_width="300dp"
-      android:layout_height="400dp"></LinearLayout>
+      android:layout_height="400dp"></FrameLayout>
     <Button
       android:onClick="onClickAdd"
       android:layout_width="wrap_content"

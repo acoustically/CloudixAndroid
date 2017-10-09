@@ -30,7 +30,7 @@ public class AddIOTDeviceActivity extends AppCompatActivity {
 
   public void onClickNext(View view) {
     Global.Obj1 = this;
-    HttpConnector connector = new HttpConnector(Server.getUrl("add-device/check.json"));
+    HttpConnector connector = new HttpConnector(Server.getUrl("switchs/check.json"));
     try {
 
       connector.post(buildJson(), new HttpResponseListener() {
