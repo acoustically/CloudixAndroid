@@ -28,7 +28,7 @@ public class AddIOTDeviceActivity2 extends AppCompatActivity {
 
   public void onClickAdd(View view) {
 
-    HttpConnector connector = new HttpConnector(Server.getUrl("add-device/add"));
+    HttpConnector connector = new HttpConnector(Server.getUrl("add-device/add-switch.json"));
     try {
       connector.post(buildJson(), new HttpResponseListener() {
         @Override
@@ -69,17 +69,19 @@ public class AddIOTDeviceActivity2 extends AppCompatActivity {
     EditText editTextSwitch2 = (EditText) findViewById(R.id.editTextSwitch2);
     String button1Name = editTextSwitch1.getText().toString();
     String button2Name = editTextSwitch2.getText().toString();
-
-    button1Json.put("serial", serial);
-    button1Json.put("position", 1);
-    button1Json.put("name", button1Name);
-    button2Json.put("serial", serial);
-    button2Json.put("position", 2);
-    button2Json.put("name", button2Name);
     JSONArray buttons = new JSONArray();
-    buttons.put(button1Json);
-    buttons.put(button2Json);
+    if(!button1Name.matches("")) {
+      button1Json.put("position", 1);
+      button1Json.put("name", button1Name);
+      buttons.put(button1Json);
+    }
+    if(!button2Name.matches("")) {
+      button2Json.put("position", 2);
+      button2Json.put("name", button2Name);
+      buttons.put(button2Json);
+    }
     JSONObject json = new JSONObjectWithToken();
+    json.put("serial", serial);
     json.put("buttons", buttons);
     return json;
   }
