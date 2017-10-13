@@ -9,11 +9,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-      android:id="@+id/testTextView"
+    <ListView
+      android:id="@+id/DeviceListView"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:text="hello_blank_fragment"/>
+      android:layout_height="match_parent">
+
+    </ListView>
   </LinearLayout>
 
 </FrameLayout>
