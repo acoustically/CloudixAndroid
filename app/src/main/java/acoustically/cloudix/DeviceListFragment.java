@@ -1,5 +1,6 @@
 package acoustically.cloudix;
 
+import android.app.ExpandableListActivity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,7 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -87,7 +89,9 @@ public class DeviceListFragment extends Fragment {
   @Override
   public void onResume() {
     super.onResume();
-    printDevice();
+    ListView listView = getView().findViewById(R.id.DeviceListView);
+    DeviceListViewAdapter listAdapter = new DeviceListViewAdapter(this);
+    getDeviceList(listView, listAdapter);
   }
 
   @Override
@@ -121,14 +125,32 @@ public class DeviceListFragment extends Fragment {
     // TODO: Update argument type and name
     void onFragmentInteraction(Uri uri);
   }
-  private void printDevice() {
+  private void getDeviceList(final ListView listView, final DeviceListViewAdapter adapter) {
     try {
       HttpConnector connector = new HttpConnector(Server.getUrl("switchs/all.json"));
       connector.post(new JSONObjectWithToken(), new HttpResponseListener() {
         @Override
         protected void httpResponse(JSONObject json) {
-          TextView textView = (TextView)getView().findViewById(R.id.testTextView);
-          textView.setText(json.toString());
+          try {
+            JSONArray jsonArray = json.getJSONArray("response");
+            for (int i = 0; i < jsonArray.length(); i++) {
+              JSONObject jsonObject = jsonArray.getJSONObject(i);
+              String name = jsonObject.getString("name");
+              String serial = jsonObject.getString("switch_serial");
+              int position = jsonObject.getInt("position");
+              boolean power;
+              if(jsonObject.getInt("power") == 0) {
+                power = false;
+              } else {
+                power = true;
+              }
+              DeviceListItem item = new DeviceListItem(serial, position, name, power);
+              adapter.addDevice(item);
+            }
+            listView.setAdapter(adapter);
+          } catch (Exception e) {
+            Log.e("ERROR", "get device error");
+          }
         }
 
         @Override
