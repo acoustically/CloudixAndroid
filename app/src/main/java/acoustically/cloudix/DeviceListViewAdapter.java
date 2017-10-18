@@ -71,9 +71,9 @@ public class DeviceListViewAdapter extends BaseAdapter implements View.OnClickLi
           json.put("serial", device.getSerial());
           json.put("position", device.getPosition());
           if(device.isPowerOn()) {
-            json.put("power", 1);
-          } else {
             json.put("power", 0);
+          } else {
+            json.put("power", 1);
           }
           connector.post(json, new HttpResponseListener() {
             @Override
@@ -82,7 +82,7 @@ public class DeviceListViewAdapter extends BaseAdapter implements View.OnClickLi
                 if (json.getString("response").equals("success")) {
                   fragment.onResume();
                 } else {
-                  Toast.makeText(viewGroup.getContext(), "networking error", Toast.LENGTH_LONG).show();
+                  Toast.makeText(viewGroup.getContext(), json.getString("message"), Toast.LENGTH_LONG).show();
                 }
               } catch (Exception e) {
                 Log.e("ERROR", "Error is occurred in turn switch method at receive response");
