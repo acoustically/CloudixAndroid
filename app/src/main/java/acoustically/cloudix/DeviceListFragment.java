@@ -1,6 +1,5 @@
 package acoustically.cloudix;
 
-import android.app.ExpandableListActivity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,13 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import acoustically.cloudix.ConnectToServer.HttpConnector;
+import acoustically.cloudix.ConnectToServer.HttpRequestor;
 import acoustically.cloudix.ConnectToServer.HttpResponseListener;
 import acoustically.cloudix.ConnectToServer.JSONObjectWithToken;
 import acoustically.cloudix.ConnectToServer.Server;
@@ -127,8 +125,8 @@ public class DeviceListFragment extends Fragment {
   }
   private void getDeviceList(final ListView listView, final DeviceListViewAdapter adapter) {
     try {
-      HttpConnector connector = new HttpConnector(Server.getUrl("switchs/all.json"));
-      connector.post(new JSONObjectWithToken(), new HttpResponseListener() {
+      HttpRequestor requestor = new HttpRequestor(Server.getUrl("switchs/all.json"));
+      requestor.post(new JSONObjectWithToken(), new HttpResponseListener() {
         @Override
         protected void httpResponse(JSONObject json) {
           try {

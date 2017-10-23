@@ -10,7 +10,7 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import acoustically.cloudix.ConnectToServer.HttpConnector;
+import acoustically.cloudix.ConnectToServer.HttpRequestor;
 import acoustically.cloudix.ConnectToServer.HttpResponseListener;
 import acoustically.cloudix.ConnectToServer.JSONObjectWithToken;
 import acoustically.cloudix.ConnectToServer.Server;
@@ -28,9 +28,9 @@ public class AddIOTDeviceActivity2 extends AppCompatActivity {
 
   public void onClickAdd(View view) {
 
-    HttpConnector connector = new HttpConnector(Server.getUrl("switchs/new-users-switchs.json"));
+    HttpRequestor requestor = new HttpRequestor(Server.getUrl("switchs/new-users-switchs.json"));
     try {
-      connector.post(buildJson(), new HttpResponseListener() {
+      requestor.post(buildJson(), new HttpResponseListener() {
         @Override
         public void httpResponse(JSONObject json) {
           try {

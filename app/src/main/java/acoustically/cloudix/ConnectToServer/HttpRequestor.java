@@ -19,10 +19,10 @@ import java.net.URL;
  * Created by acoustically on 17. 10. 3.
  */
 
-public class HttpConnector {
+public class HttpRequestor {
   String mUrl;
 
-  public HttpConnector(String url) {
+  public HttpRequestor(String url) {
     this.mUrl = url;
   }
   public void addParams(String key, String value) {

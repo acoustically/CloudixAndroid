@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
-import acoustically.cloudix.ConnectToServer.HttpConnector;
+import acoustically.cloudix.ConnectToServer.HttpRequestor;
 import acoustically.cloudix.ConnectToServer.HttpResponseListener;
 import acoustically.cloudix.ConnectToServer.JSONObjectWithToken;
 import acoustically.cloudix.ConnectToServer.Server;
@@ -48,8 +48,8 @@ public class SignInGetPasswordActivity extends AppCompatActivity {
     JSONObject json = new JSONObjectWithToken();
     json.put("id", id);
     json.put("password", password);
-    HttpConnector connector = new HttpConnector(Server.getUrl(action));
-    connector.post(json, new HttpResponseListener() {
+    HttpRequestor requestor = new HttpRequestor(Server.getUrl(action));
+    requestor.post(json, new HttpResponseListener() {
       @Override
       public void httpResponse(JSONObject json) {
         try {

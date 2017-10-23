@@ -16,7 +16,7 @@ import org.json.JSONObject;
 import java.util.LinkedList;
 import java.util.List;
 
-import acoustically.cloudix.ConnectToServer.HttpConnector;
+import acoustically.cloudix.ConnectToServer.HttpRequestor;
 import acoustically.cloudix.ConnectToServer.HttpResponseListener;
 import acoustically.cloudix.ConnectToServer.JSONObjectWithToken;
 import acoustically.cloudix.ConnectToServer.Server;
@@ -66,7 +66,7 @@ public class DeviceListViewAdapter extends BaseAdapter implements View.OnClickLi
       @Override
       public void onClick(View v) {
         try {
-          HttpConnector connector = new HttpConnector(Server.getUrl("switchs/turn.json"));
+          HttpRequestor requestor = new HttpRequestor(Server.getUrl("switchs/turn.json"));
           JSONObject json = new JSONObjectWithToken();
           json.put("serial", device.getSerial());
           json.put("position", device.getPosition());
@@ -75,7 +75,7 @@ public class DeviceListViewAdapter extends BaseAdapter implements View.OnClickLi
           } else {
             json.put("power", 1);
           }
-          connector.post(json, new HttpResponseListener() {
+          requestor.post(json, new HttpResponseListener() {
             @Override
             protected void httpResponse(JSONObject json) {
               try {

@@ -3,7 +3,6 @@ package acoustically.cloudix.AddIOTDevice;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.ExpandedMenuView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -11,9 +10,7 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
-import java.net.HttpURLConnection;
-
-import acoustically.cloudix.ConnectToServer.HttpConnector;
+import acoustically.cloudix.ConnectToServer.HttpRequestor;
 import acoustically.cloudix.ConnectToServer.HttpResponseListener;
 import acoustically.cloudix.ConnectToServer.JSONObjectWithToken;
 import acoustically.cloudix.ConnectToServer.Server;
@@ -30,10 +27,10 @@ public class AddIOTDeviceActivity extends AppCompatActivity {
 
   public void onClickNext(View view) {
     Global.Obj1 = this;
-    HttpConnector connector = new HttpConnector(Server.getUrl("switchs/check.json"));
+    HttpRequestor requestor = new HttpRequestor(Server.getUrl("switchs/check.json"));
     try {
 
-      connector.post(buildJson(), new HttpResponseListener() {
+      requestor.post(buildJson(), new HttpResponseListener() {
         @Override
         public void httpResponse(JSONObject json) {
           try {

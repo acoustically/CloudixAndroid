@@ -7,7 +7,7 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import acoustically.cloudix.ConnectToServer.HttpConnector;
+import acoustically.cloudix.ConnectToServer.HttpRequestor;
 
 import static org.junit.Assert.*;
 
@@ -27,19 +27,19 @@ public class ExampleInstrumentedTest {
   @Test
   public void testAddParams() {
     String mUrl = "http://test.com/";
-    HttpConnector connector = new HttpConnector(mUrl);
-    connector.addParams("test", "test");
-    assertEquals("http://test.com/?test=test",connector.getUrl());
+    HttpRequestor requestor = new HttpRequestor(mUrl);
+    requestor.addParams("test", "test");
+    assertEquals("http://test.com/?test=test",requestor.getUrl());
 
     mUrl = "http://test.com/?test=test";
-    connector = new HttpConnector(mUrl);
-    connector.addParams("test", "test");
-    assertEquals("http://test.com/?test=test&test=test", connector.getUrl());
+    requestor = new HttpRequestor(mUrl);
+    requestor.addParams("test", "test");
+    assertEquals("http://test.com/?test=test&test=test", requestor.getUrl());
   }/*
   @Test
   public void testHttpGet() {
     String url = "http://naver.com";
-    HttpConnector connector = new HttpConnector(url);
+    HttpRequestor connector = new HttpRequestor(url);
     String data = connector.get();
     assertEquals("test", data);
   }*/
